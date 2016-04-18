@@ -1,19 +1,22 @@
 package lab3;
 
 public class MailBoxClearThread extends Thread {
-	
-	MailBox mailBox;
 
+	private MailBox mailBox;
 
 	public MailBoxClearThread(MailBox mailBox) {
 		this.mailBox = mailBox;
 	}
-	
-	public synchronized void run() {
-		
-		while(true) {
-			if(!mailBox.isEmpty()){
-				System.out.println(mailBox.clearValue());
+
+	public void run() {
+
+		while (true) {
+
+			if (!mailBox.isEmpty()) {
+				synchronized (mailBox) {
+					System.out.println(mailBox.clearValue());
+					mailBox.notifyAll();
+				}
 			}
 			try {
 				sleep((long) Math.random());
@@ -21,8 +24,7 @@ public class MailBoxClearThread extends Thread {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		
 		}
 	}
-	
+
 }

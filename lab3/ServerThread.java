@@ -24,6 +24,7 @@ public class ServerThread extends Thread {
 			BufferedReader in = new BufferedReader(new InputStreamReader(input));
 			while (!socket.isClosed()) {
 				String message = in.readLine();
+								
 				System.out.println(message);
 				message += "\n";
 				output.write(message.getBytes());

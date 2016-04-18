@@ -5,17 +5,11 @@ public class MailBox {
 	private volatile String value;
 
 	public MailBox() {
-
+		value = "asd";
 	}
 
 	public synchronized void assignValue(String value) {
 		System.out.println(value);
-		try {
-			wait();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		this.value = value;
 	}
 	
@@ -30,7 +24,6 @@ public class MailBox {
 			
 			String temp = value;
 			value = null;
-			notifyAll();
 			return temp;
 		
 	}
