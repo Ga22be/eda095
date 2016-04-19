@@ -44,6 +44,7 @@ public class ChatServerThread extends Thread {
 						mailBox.wait();
 						System.out.println("aasad");
 						mailBox.assignValue(message);
+						mailBox.wait();
 					}
 				}
 
@@ -61,6 +62,7 @@ public class ChatServerThread extends Thread {
 			}
 			socket.close();
 			in.close();
+			output.close();
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

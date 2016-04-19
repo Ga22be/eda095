@@ -21,11 +21,11 @@ public class Participants extends Thread {
 		System.out.println(participants.size());
 		participants.add(socket);
 		System.out.println(participants.size());
-
 		System.out.println("added socket to participant");
 	}
 
 	public void run() {
+		mailBox.assignValue("Welcome");
 		while (true) {
 
 			if (!mailBox.isEmpty()) {
@@ -38,11 +38,11 @@ public class Participants extends Thread {
 
 					for (Socket s : participants) {
 
-						OutputStream output;
 						try {
-
-							output = s.getOutputStream();
-							output.write(message.getBytes());
+							System.out.println(message);
+							OutputStream output = s.getOutputStream();
+							output.write((message + "\n").getBytes());
+							output.flush();
 						} catch (IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
