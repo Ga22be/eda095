@@ -5,11 +5,11 @@ public class MailBox {
 	private volatile String value;
 
 	public MailBox() {
-		value = "asd";
+		value = "Welcome";
 	}
 
 	public synchronized void assignValue(String value) {
-		System.out.println(value);
+		//System.out.println(value);
 		this.value = value;
 	}
 	
