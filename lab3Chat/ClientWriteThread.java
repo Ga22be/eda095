@@ -11,6 +11,7 @@ public class ClientWriteThread extends Thread{
 	public ClientWriteThread(Socket socket){
 		this.socket = socket;
 	}
+	@Override
 	public void run(){
 		BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
 		PrintWriter out;

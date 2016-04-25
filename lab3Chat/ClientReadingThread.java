@@ -14,6 +14,7 @@ public class ClientReadingThread extends Thread {
 
 		this.socket = socket;
 	}
+	@Override
 	public void run() {
 
 		InputStream input;

@@ -10,6 +10,7 @@ public class MailBoxAssignThread extends Thread {
 		this.name = name;
 	}
 
+	@Override
 	public void run() {
 
 		for (int i = 0; i < 5; i++) {

@@ -8,6 +8,7 @@ public class MailBoxClearThread extends Thread {
 		this.mailBox = mailBox;
 	}
 
+	@Override
 	public void run() {
 
 		while (true) {

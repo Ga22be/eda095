@@ -13,6 +13,7 @@ public class RunnerOneThread extends Thread{
 	public RunnerOneThread(URL url){
 		this.url = url;
 	}
+	@Override
 	public void run(){
 		InputStream in;
 		System.out.println("Start");

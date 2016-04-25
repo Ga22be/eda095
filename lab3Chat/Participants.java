@@ -24,6 +24,7 @@ public class Participants extends Thread {
 		System.out.println("added socket to participant");
 	}
 
+	@Override
 	public void run() {
 		mailBox.assignValue("Welcome");
 		while (true) {
