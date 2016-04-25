@@ -4,6 +4,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 
 public class Spider {
@@ -29,8 +30,7 @@ public class Spider {
 	public synchronized void addTraversed(URL url) {
 
 		traversedURLs.put(url, "");
-	
-		
+
 	}
 
 	public synchronized void addRemainingURL(URL url) {
@@ -38,7 +38,6 @@ public class Spider {
 		if (!traversedURLs.containsKey(url)) {
 			remainingURLs.add(url);
 		}
-		System.out.println(remainingURLs.size());
 		this.notifyAll();
 	}
 
@@ -48,43 +47,56 @@ public class Spider {
 
 	public synchronized URL getURL() {
 		try {
-		if(remainingURLs.isEmpty()){
-			wait();
-		}
+			if (remainingURLs.isEmpty()) {
+				wait();
+			}
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-		return remainingURLs.getFirst();
+		URL temp = remainingURLs.getFirst();
+		remainingURLs.removeFirst();
+
+		return temp;
 
 	}
 
 	public boolean done() {
 
-		System.out.println(traversedURLs.size());
-		
+		System.out.println("Traversed links: " + traversedURLs.size());
+
 		if (traversedURLs.size() >= goal) {
 			printResult();
 			return true;
-			
+
 		} else {
 			return false;
 		}
 
 	}
 
+	
+	
 	public void printResult() {
-		
-		try {
-			traversedURLs.put(new URL("http://den_skriver_ut"), "");
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+
+		// print out the links
+		System.out.println("Links: ");
+		Iterator<URL> itr = traversedURLs.keySet().iterator();
+		while (itr.hasNext()) {
+			System.out.println(itr.next().toString());
 		}
+		System.out.println();
+
+		// print out the mailto addresses
+		System.out.println("Mailto: ");
+		for (URL url : mailto) {
+			System.out.println(url.toString());
+		}
+		System.out.println();
 		
-		System.out.println("Links" + traversedURLs.toString());
-		System.out.println("Mailto: " + mailto.toString());
+		System.out.println("Total amound links found: " + remainingURLs.size());
+
 	}
 
 	public void init(URL startURL) {

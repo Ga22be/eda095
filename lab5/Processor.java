@@ -20,16 +20,14 @@ public class Processor extends Thread {
 	@Override
 	public void run() {
 
-		
-		
 		// while goal is not reached
 		while (!spider.done()) {
 
 			// -- PARSE-PARTY
 			URL baseURL = spider.getURL();
-			
-			System.out.println("getURL returned: " + baseURL.toString());
-			
+
+			// System.out.println("getURL returned: " + baseURL.toString());
+
 			try {
 				Document doc = Jsoup.connect(baseURL.toString()).get();
 
@@ -39,14 +37,13 @@ public class Processor extends Thread {
 
 				Elements frames = doc.select("frame[src]");
 
-
 				// adding links
 				for (Element link : links) {
-					
+
 					String extractedLink = link.attr("href");
-					System.out.println(extractedLink);
-					
 					URL url = new URL(baseURL, extractedLink);
+					System.out.println(url.toString());
+
 					if (mailto.contains(link)) {
 						spider.addMailto(url);
 					} else {

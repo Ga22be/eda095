@@ -3,12 +3,9 @@ package lab5;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-
-
 public class Main {
 
 	public static void main(String args[]) {
-
 
 		URL startURL = null;
 
@@ -20,27 +17,23 @@ public class Main {
 		}
 
 		// number of links
-		int nbrLinks = 1;
+		int nbrLinks = 100;
 
 		Spider spider = new Spider(nbrLinks);
 
 		// 10 thread for now
-		int nbrThreads = 1;
+		int nbrThreads = 10;
+
+		// create threads and start threads
 
 		for (int i = 0; i < nbrThreads; i++) {
-
 			Processor processor = new Processor(spider);
 			processor.start();
-			// create threads
-
 		}
-		
+
 		spider.init(startURL);
 
-		// the result of traversed links
-
 		
-
 	}
 
 }
