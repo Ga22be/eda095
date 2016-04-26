@@ -6,7 +6,6 @@ import java.net.URL;
 public class Main {
 
 	public static void main(String args[]) {
-
 		URL startURL = null;
 
 		try {
@@ -17,9 +16,10 @@ public class Main {
 		}
 
 		// number of links
-		int nbrLinks = 100;
+		int nbrLinks = 2000;
 
 		Spider spider = new Spider(nbrLinks);
+		spider.starttime();
 
 		// 10 thread for now
 		int nbrThreads = 10;

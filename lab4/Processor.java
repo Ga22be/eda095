@@ -24,7 +24,11 @@ public class Processor extends Thread {
 		while (!spider.done()) {
 
 			// -- PARSE-PARTY
-			URL baseURL = spider.getURL();
+			
+			URL baseURL= null ;
+			while(baseURL == null){
+				baseURL= spider.getURL();
+			}
 
 			// System.out.println("getURL returned: " + baseURL.toString());
 
@@ -42,9 +46,9 @@ public class Processor extends Thread {
 
 					String extractedLink = link.attr("href");
 					URL url = new URL(baseURL, extractedLink);
-					System.out.println(url.toString());
+					//System.out.println(url.toString());
 
-					if (mailto.contains(link)) {
+					if (url.toString().contains("mailto:")) {
 						spider.addMailto(url);
 					} else {
 						spider.addRemainingURL(url);
@@ -63,7 +67,6 @@ public class Processor extends Thread {
 
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
 
 		}
