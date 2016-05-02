@@ -1,3 +1,4 @@
+package lab5;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
@@ -6,13 +7,14 @@ import java.net.SocketException;
 import java.text.DateFormat;
 import java.util.Date;
 
-public class TimeServerUDP {
-	public static void main(String[]args){
-	new TimeServerUDP();
+public class TimeServerUDP extends Thread {
+	int portNbr;
+	public TimeServerUDP(int portNbr) {
+		this.portNbr = portNbr;
 	}
-	public TimeServerUDP() {
+	public void run(){
 		try {
-			DatagramSocket ds = new DatagramSocket(30000);
+			DatagramSocket ds = new DatagramSocket(portNbr);
 			byte[] buf = new byte[65536];
 			DatagramPacket dp = new DatagramPacket(buf, buf.length);
 			while(true){
@@ -21,7 +23,7 @@ public class TimeServerUDP {
 			InetAddress address = dp.getAddress();
 			int port = dp.getPort();
 			System.out.println(message + " " + port + " " + address.toString());
-			String reply = "error";
+			String reply = "error! unknown command, try time or date";
 			Date date = new Date();
 			switch (message) {
 			case "date":
@@ -46,3 +48,4 @@ public class TimeServerUDP {
 		}
 	}
 }
+
