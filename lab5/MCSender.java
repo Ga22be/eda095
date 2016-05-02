@@ -1,6 +1,9 @@
 package lab5;
-import java.net.*;
-import java.io.*;
+
+import java.io.IOException;
+import java.net.DatagramPacket;
+import java.net.InetAddress;
+import java.net.MulticastSocket;
 
 public class MCSender {
 

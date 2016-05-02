@@ -1,9 +1,11 @@
 package lab5;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.text.DateFormat;
 import java.util.Date;
+
 public class TimeServer2 {
 	public static void main (String[]args){
 //	Scanner scan = new Scanner(System.in);
