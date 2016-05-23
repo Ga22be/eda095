@@ -60,7 +60,7 @@ out.write("nicely flushed!");
 
  * **Deadlocks** 
  ```
-threads x,y  wants A,B
+threads x,y  wants access to objects A,B
 x gets A first
 Y gets B first
 now both x ,y stuck waiting 
@@ -70,16 +70,24 @@ now both x ,y stuck waiting
 #### **Threads in java**
 * Both class **Thread** and interface **Runnable** implements/overrides the **run()** method.
 
-* Start Thread:
-	* ```MyThread mt = new MyThread();
-	mt.start(); ```
-	***or***
-	* ```	Runnable r = ...
-		new Thread(r).start();
-	```
+* Start Thread: 
+
+
+```
+MyThread mt = new MyThread();
+mt.start(); 
+```
+	
+***or***
+
+
+```
+Runnable r = ...
+new Thread(r).start();
+```
 
 #### **Synchronization and Monitors**
-`synchronized void synchMe() { ... } ;`
+`synchronized void synchMe() { ... }`
 
 * The thread running the *synchronized* method **owns** it. 
 *  Therefore other Threads that want to run `synchMe()`are in the **blocked state**
@@ -100,6 +108,8 @@ public synchronized void addNumber(int number) {
 
  - `notify()`awakens **one** arbitrary thread that's waiting
  - `notifyAll()`awekens **all** waiting threads
+
+
 
 
 
