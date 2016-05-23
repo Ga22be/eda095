@@ -23,7 +23,7 @@ Concept explanation
 
 
 **Read ten bytes**
-```
+```java
         byte[] input = new byte[10]
         for (int i = 0; i < input.length; i++) {
     	    int byte = inputStream.read();
@@ -44,7 +44,7 @@ Concept explanation
 * **Buffers** increases effectiviness but don't forget to **flush() !**
 
 
-```
+```java
 OutputStream os = ...
 PrintWriter out = new PrintWriter(os,true);
 //true means autoflushing
@@ -73,7 +73,7 @@ now both x ,y stuck waiting
 * Start Thread: 
 
 
-```
+```java
 MyThread mt = new MyThread();
 mt.start(); 
 ```
@@ -81,7 +81,7 @@ mt.start();
 ***or***
 
 
-```
+```java
 Runnable r = ...
 new Thread(r).start();
 ```
@@ -122,7 +122,7 @@ public synchronized void addNumber(int number) {
 	* **URL** are the most common form of an ***URI***
 
 creating a **URL** with Java:
-```
+```java
     URL baseURL = new URL("http://www.base.com");
     new URL(baseURL,"relative.html");
 ```
