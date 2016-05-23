@@ -32,7 +32,7 @@ Concept explanation
 	    }
 ```
 **or just**
-```
+```java
     byte[] input = new byte[10]; 
     int r = inputStream.read(input);
 ```
