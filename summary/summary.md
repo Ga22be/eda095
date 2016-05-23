@@ -95,7 +95,7 @@ new Thread(r).start();
 `wait()` `notify()` `notifyAll()` are useful if the **Monitor**-object isn't ready for action.
 
 **A monitor class:**
-```
+```java
 public synchronized int getNumber() {
 	if (numbers.empty()) wait();
 	return numbers.pop();
