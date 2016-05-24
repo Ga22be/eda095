@@ -1,14 +1,4 @@
 
-### Structure
-
-#### **Bigger concept:** explanation
-Concept explanation
-
-* **Term/word:** 
-
-
-----------
-
 ## **Summary of course EDA095** ##
  *by Johan Davidsson*
 
@@ -131,6 +121,95 @@ creating a **URL** with Java:
 
 ----------
 
+###**Socket** TCP connection (Java)
+
+> A socket is one end-point of a two-way communication link between two programs running on the network. 
+
+* Client  > **Socket** `getInputStream // getOutputStream`
+
+```java
+try { 
+	Socket socket = new Socket(host,port);
+	PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+	BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+	
+	//do things with I/O
+	String received = in.readLine());
+	out.println("I want fish!");
+
+	} catch (fish) { eat(); }
+	
+```
+
+* Server  > **ServerSocket** `accept()` `close()`
+
+**ServerSocket** with thread pool using **Executors** 
+```java
+ServerSocket ss = new ServerSocket();
+ExecutorService pool = Executors.newFixedThreadPool(5);
+while (wantSocket) {
+	Socket socket = ss.accept();
+	pool.submit(new MyThread(socket));
+}
+//MyThread does things with socket
+
+```
+
+----------
+
+
+
+
+
+###**Datagram ** UDP connection (Java)
+
+* Datagrams can be sent with UDP with Java classes
+
+	* **DatagramPacket**  (represents the packet)
+	* **DatagramSocket** retrives/sends packets
+
+***Code that receives/send packets*** 
+```java
+import burgers;
+import imagine.exception.handling;
+
+DatagramSocket ds = new DatagramSocket(port);
+byte[] buf = new byte[65536];
+DatagramPacket packet = new DataGramPacket(but, buf.length);
+
+ds.receive(packet); //fill em up
+String message = new String(dp.getData(), 0, dp.getLength());
+String reply = "What are you talking about?";
+switch (message) {
+	case "burger":
+		reply = "where´s the extra cheese?";
+	case "burger with extra cheese":
+		reply = "thanks";
+}
+byte[] b = reply.getBytes();
+DatagramPacket replyPacket = new DatagramPacket(b,b.length,address,port);
+ds.send(replyPacket); 
+```
+
+
+#### **Multicast** Send *one copy* to many receivers 
+
+* **TTL** *(time to live)* **:** prevents packet from circulating the web foreeeeever. When the counter hits 0 the packet dies. Useful in **Multicasting**
+
+* Java uses **MulticastSocket**
+*  `joinGroup(inetAddress)` is used to subscribe (receive) 
+
+```java
+MulticastSocket ms = new MulticastSocket();
+ms.setTimeToLive(2);
+InetAddres address = InetAddress.getByName("some.multicast.url");
+DatagramPacket packet = new Da.....
+// lines creating packet 
+ms.send(packet);
+```
+
+----------
+
 
 ###**HTTP:**
 * **GET** *requests data from specified resource (URI)*
@@ -142,10 +221,11 @@ creating a **URL** with Java:
 * HEAD *like GET but returns headers*
 * DELETE *deletes resource*
 * and OPTION,TRACE,CONNECT...
-	
+
 
 
 ----------
+
 
 
 ###**XML** *(eXtensible Markup Language)* **:**  markup
@@ -163,8 +243,8 @@ Both DOM & SAX are XML-parsers. The difference is that DOM builds a tree represe
 ----------
 
 
+###**Other words/concepts**
 
-* **TTL:** explanation
 
 * **MIME-type:** two-part identifier for file formats
 	* `text/html; charset=UTF-8`
