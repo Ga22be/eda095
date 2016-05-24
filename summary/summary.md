@@ -202,7 +202,7 @@ ms.send(packet);
 ----------
 
 
-###**IP + URL/URI:** explanation
+###**IP + URL/URI:** 
 
 * **URI** *(Uniform Resource Identifier)* **:** reference to a resource (subsumes URL)
 
@@ -292,7 +292,7 @@ Both DOM & SAX are XML-parsers. The difference is that DOM builds a tree represe
 ----------
 
 
-* **REST** *( - architecure)* **:** add explanation
+
 * **Codec:** program that encodes/decodes data stream e.g video
 
 *  **RTP (Real Time Transport Protocol):** network protocol for delivering audio/video over IP e.g *VoIP*
@@ -307,7 +307,7 @@ Both DOM & SAX are XML-parsers. The difference is that DOM builds a tree represe
 ###**Not covered:**
 
  - **java.nio** multiple TCP-connections on one thread without *busy-wait* (Selector)
- - 
+ - **REST** *( - architecure)* **:** 
 
 ----------
 
