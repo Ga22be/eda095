@@ -1,6 +1,6 @@
 
-## **Summary of course EDA095** ##
- *by Johan Davidsson*
+### **General summary of course EDA095** ###
+ by Johan Davidsson
 
 ----------
 ###**Streams:** I/O in Java
@@ -47,7 +47,7 @@ out.write("nicely flushed!");
 ----------
 ###**Threads:** do things in parallel
 
-	
+* ***Busy-wait:*** thread consumes available CPU-time while waiting.
 
  * **Deadlocks** 
  
@@ -151,9 +151,9 @@ while (wantSocket) {
 
 
 
-###**Datagram ** UDP connection (Java)
+###**Datagram** UDP connection (Java)
 
-* Datagrams can be sent with UDP with Java classes
+* Datagrams can be sent with UDP with Java classes:
 
 	* **DatagramPacket**  (represents the packet)
 	* **DatagramSocket** retrives/sends packets
@@ -182,7 +182,7 @@ ds.send(replyPacket);
 ```
 
 
-#### **Multicast** Send *one copy* to many receivers 
+#### **Multicast:** Send *one copy* to many receivers 
 
 * **TTL** *(time to live)* **:** prevents packet from circulating the web foreeeeever. When the counter hits 0 the packet dies. Useful in **Multicasting**
 
@@ -207,7 +207,7 @@ ms.send(packet);
 * **URI** *(Uniform Resource Identifier)* **:** reference to a resource (subsumes URL)
 
 * **URL** *(Uniform Resource Locator)* **:** reference to web resource
-	* **URL** are the most common form of an ***URI***
+	* **URL** is the most common form of an ***URI***
 
 creating a **URL** with Java:
 ```java
@@ -276,16 +276,45 @@ Both DOM & SAX are XML-parsers. The difference is that DOM builds a tree represe
 	* `text/html; charset=UTF-8`
 	* text is the type, html is the subtype and chars... is the parameter.
 
-* **UTF-8:** explanation
-* **Unicode:** explanation
-* **JSP ** *(Java Server Pages)* **:** explanation
-* **REST** *( - architecure)* **:** explanation
+
+* **Unicode:** giant collection of characters with correlating "code". A family of encoders implements it.  
+* **UTF-8:** implements Unicode so that each character gets one (or more) byte(s).
+
+
+####**JSP & Servlets**####
+
+* **JSP** *(Java Server Pages)* **:** code runs on server *in* HTML (compare **PHP**)
+*  **Servlet:** code runs on server 
+
+> " JSP is a webpage scripting language that can generate dynamic content while Servlets are Java programs that are already compiled which also creates dynamic web content. Servlets run faster compared to JSP. JSP can be compiled into Java Servlets. It's easier to code in JSP than in Java Servlets. " 
+> https://www.google.se/?gws_rd=cr,ssl&ei=L7jdUubfL4mG4AS6vIGoDA#q=servlet+jsp+difference
+
+----------
+
+
+* **REST** *( - architecure)* **:** add explanation
+* **Codec:** program that encodes/decodes data stream e.g video
+
+*  **RTP (Real Time Transport Protocol):** network protocol for delivering audio/video over IP e.g *VoIP*
+*  **RTSP (Real-Time Control Protocol):** provides statistics/control info for an RTP session
+*  **SIP (Session Initiation Protocol)**: communication protocol with similar operations as HTTP. Used with **RTP** and **RTSP**
+
+* **RMI (Remote Method Invocation) :** Communicate Java-objects over network. The process of converting object parameters/returns to a Serializable format appropriate for sending is called ***Marshaling***. A **Registry** is a separate server program that helps **RMI-servers** and **RMI-clients** to connect.
 
 
 ----------
 
+###**Not covered:**
+
+ - **java.nio** multiple TCP-connections on one thread without *busy-wait* (Selector)
+ - 
+
+----------
+
+
 ###**Notes:**
 
- - Remember, exceptions are thrown everywhere
- - Catch 'em all
+ - Remember, exceptions are thrown everywhere in the code
+ - In real life you have to **Catch 'em all**
+ * No guarantee of truth
 
