@@ -25,6 +25,7 @@
 ```java
     byte[] input = new byte[10]; 
     int r = inputStream.read(input);
+    //.read(byte[]) returns number of bytes read
 ```
 
 ####**Output**
@@ -49,6 +50,7 @@ out.write("nicely flushed!");
 	
 
  * **Deadlocks** 
+ 
  ```
 threads x,y  wants access to objects A,B
 x gets A first
@@ -77,7 +79,10 @@ new Thread(r).start();
 ```
 
 #### **Synchronization and Monitors**
-`synchronized void synchMe() { ... }`
+
+```java
+synchronized void synchMe() { ... }
+```
 
 * The thread running the *synchronized* method **owns** it. 
 *  Therefore other Threads that want to run `synchMe()`are in the **blocked state**
@@ -104,22 +109,7 @@ public synchronized void addNumber(int number) {
 
 
 ----------
-###**IP + URL/URI:** explanation
 
-* **URI** *(Uniform Resource Identifier)* **:** reference to a resource (subsumes URL)
-
-* **URL** *(Uniform Resource Locator)* **:** reference to web resource
-	* **URL** are the most common form of an ***URI***
-
-creating a **URL** with Java:
-```java
-    URL baseURL = new URL("http://www.base.com");
-    new URL(baseURL,"relative.html");
-```
-
- - **IP:** stands for **I** *don't care about explaining I-* **P** *right now*
-
-----------
 
 ###**Socket** TCP connection (Java)
 
@@ -208,10 +198,46 @@ DatagramPacket packet = new Da.....
 ms.send(packet);
 ```
 
+
 ----------
 
 
-###**HTTP:**
+###**IP + URL/URI:** explanation
+
+* **URI** *(Uniform Resource Identifier)* **:** reference to a resource (subsumes URL)
+
+* **URL** *(Uniform Resource Locator)* **:** reference to web resource
+	* **URL** are the most common form of an ***URI***
+
+creating a **URL** with Java:
+```java
+ URL baseURL = new URL("http://www.base.com");
+ URL myUrl = new URL(baseURL,"relative.html");
+```
+download URL content to file
+```java
+import patience;
+
+File file = new File("Target");
+InputStream in = myUrl.openStream();
+FileOuptutStream fos = new FileOutputStream(file);
+
+while((bytesRead = in.read(buf)) != -1) {
+	fos.write(buf,0, bytesRead);
+}
+fos.close(); in.close(); //coffee break
+```
+
+
+
+ - **IP:** stands for **I** *don't care about explaining I-* **P** *right now*
+
+
+
+----------
+
+
+###**HTTP** *(Hypertext Transfer Protocol)* **:** 
 * **GET** *requests data from specified resource (URI)*
 	*  `foo.se?name1=value1&name2=value2` query in URL
 * **POST** *submits data to be processed to a specified resource*
