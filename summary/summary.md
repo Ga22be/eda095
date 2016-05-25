@@ -17,13 +17,13 @@
 byte[] input = new byte[10];
 for (int i = 0; i < input.length; i++) {
 	int b = inputStream.read();
-	if (byte == -1) break; 
+	if (b == -1) break;
     	input[i] = (byte) b;
 }
 ```
 **or just**
 ```java
-byte[] input = new byte[10]; 
+byte[] input = new byte[10];
 int r = inputStream.read(input);
 //.read(byte[]) returns number of bytes read
 ```
@@ -49,27 +49,27 @@ out.write("nicely flushed!");
 
 * ***Busy-wait:*** thread consumes available CPU-time while waiting.
 
- * **Deadlocks** 
- 
+ * **Deadlocks**
+
  ```
 threads x,y  wants access to objects A,B
 x gets A first
 Y gets B first
-now both x ,y stuck waiting 
+now both x ,y stuck waiting
 
  ```
 
 #### **Threads in java**
 * Both class **Thread** and interface **Runnable** implements/overrides the **run()** method.
 
-* Start Thread: 
+* Start Thread:
 
 
 ```java
 MyThread mt = new MyThread();
-mt.start(); 
+mt.start();
 ```
-	
+
 ***or***
 
 
@@ -84,7 +84,7 @@ new Thread(r).start();
 synchronized void synchMe() { ... }
 ```
 
-* The thread running the *synchronized* method **owns** it. 
+* The thread running the *synchronized* method **owns** it.
 *  Therefore other Threads that want to run `synchMe()`are in the **blocked state**
 
 `wait()` `notify()` `notifyAll()` are useful if the **Monitor**-object isn't ready for action.
@@ -92,7 +92,11 @@ synchronized void synchMe() { ... }
 **A monitor class:**
 ```java
 public synchronized int getNumber() {
-	if (numbers.empty()) wait();
+  /*A thread can also wake up without being notified, interrupted, or timing out, a so-called spurious wakeup.
+  While this will rarely occur in practice, applications must guard against it by testing for the condition that
+  should have caused the thread to be awakened, and continuing to wait if the condition is not satisfied.
+  In other words, waits should always occur in loops*/
+	while (numbers.empty()) wait();
 	return numbers.pop();
 }
 public synchronized void addNumber(int number) {
@@ -113,27 +117,27 @@ public synchronized void addNumber(int number) {
 
 ###**Socket** TCP connection (Java)
 
-> A socket is one end-point of a two-way communication link between two programs running on the network. 
+> A socket is one end-point of a two-way communication link between two programs running on the network.
 
 * Client  > **Socket** `getInputStream // getOutputStream`
 
 ```java
-try { 
+try {
 	Socket socket = new Socket(host,port);
 	PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
 	BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-	
+
 	//do things with I/O
 	String received = in.readLine());
 	out.println("I want fish!");
 
 	} catch (fish) { eat(); }
-	
+
 ```
 
 * Server  > **ServerSocket** `accept()` `close()`
 
-**ServerSocket** with thread pool using **Executors** 
+**ServerSocket** with thread pool using **Executors**
 ```java
 ServerSocket ss = new ServerSocket();
 ExecutorService pool = Executors.newFixedThreadPool(5);
@@ -158,14 +162,14 @@ while (wantSocket) {
 	* **DatagramPacket**  (represents the packet)
 	* **DatagramSocket** retrives/sends packets
 
-***Code that receives/send packets*** 
+***Code that receives/send packets***
 ```java
 import burgers;
 import imagine.exception.handling;
 
 DatagramSocket ds = new DatagramSocket(port);
 byte[] buf = new byte[65536];
-DatagramPacket packet = new DataGramPacket(but, buf.length);
+DatagramPacket packet = new DataGramPacket(buf, buf.length);
 
 ds.receive(packet); //fill em up
 String message = new String(dp.getData(), 0, dp.getLength());
@@ -178,23 +182,23 @@ switch (message) {
 }
 byte[] b = reply.getBytes();
 DatagramPacket replyPacket = new DatagramPacket(b,b.length,address,port);
-ds.send(replyPacket); 
+ds.send(replyPacket);
 ```
 
 
-#### **Multicast:** Send *one copy* to many receivers 
+#### **Multicast:** Send *one copy* to many receivers
 
 * **TTL** *(time to live)* **:** prevents packet from circulating the web foreeeeever. When the counter hits 0 the packet dies. Useful in **Multicasting**
 
 * Java uses **MulticastSocket**
-*  `joinGroup(inetAddress)` is used to subscribe (receive) 
+*  `joinGroup(inetAddress)` is used to subscribe (receive)
 
 ```java
 MulticastSocket ms = new MulticastSocket();
 ms.setTimeToLive(2);
 InetAddres address = InetAddress.getByName("some.multicast.url");
 DatagramPacket packet = new Da.....
-// lines creating packet 
+// lines creating packet
 ms.send(packet);
 ```
 
@@ -202,7 +206,7 @@ ms.send(packet);
 ----------
 
 
-###**URL/URI:** 
+###**URL/URI:**
 
 * **URI** *(Uniform Resource Identifier)* **:** reference to a resource (subsumes URL)
 
@@ -232,12 +236,12 @@ fos.close(); in.close(); //coffee break
 ----------
 
 
-###**HTTP** *(Hypertext Transfer Protocol)* **:** 
+###**HTTP** *(Hypertext Transfer Protocol)* **:**
 * **GET** *requests data from specified resource (URI)*
 	*  `foo.se?name1=value1&name2=value2` query in URL
 * **POST** *submits data to be processed to a specified resource*
   * `foo.se` query in "message body" of POST
-  
+
 * PUT *stores the resource*
 * HEAD *like GET but returns headers*
 * DELETE *deletes resource*
@@ -279,9 +283,9 @@ Both DOM & SAX are XML-parsers. The difference is that DOM builds a tree represe
 ####**JSP & Servlets**####
 
 * **JSP** *(Java Server Pages)* **:** code runs on server *in* HTML (compare **PHP**)
-*  **Servlet:** code runs on server 
+*  **Servlet:** code runs on server
 
-> " JSP is a webpage scripting language that can generate dynamic content while Servlets are Java programs that are already compiled which also creates dynamic web content. Servlets run faster compared to JSP. JSP can be compiled into Java Servlets. It's easier to code in JSP than in Java Servlets. " 
+> " JSP is a webpage scripting language that can generate dynamic content while Servlets are Java programs that are already compiled which also creates dynamic web content. Servlets run faster compared to JSP. JSP can be compiled into Java Servlets. It's easier to code in JSP than in Java Servlets. "
 > http://stackoverflow.com/questions/4965914/java-jsp-vs-servlet
 
 ----------
@@ -302,7 +306,7 @@ Both DOM & SAX are XML-parsers. The difference is that DOM builds a tree represe
 ###**Not covered:**
 
  - **java.nio** multiple TCP-connections on one thread without *busy-wait* (Selector)
- - **REST** *( - architecure)* **:** 
+ - **REST** *( - architecure)* **:**
 
 ----------
 
@@ -312,4 +316,3 @@ Both DOM & SAX are XML-parsers. The difference is that DOM builds a tree represe
  - Remember, exceptions are thrown everywhere in the code
  - In real life you have to **Catch 'em all**
  * No guarantee of truth
-
